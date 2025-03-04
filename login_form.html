@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        /* Reset body and layout */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #3498db, #8e44ad);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for the form */
+        .login-container {
+            background-color: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-container h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* Form elements */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            position: relative;
+        }
+
+        /* Circle neon effect on focus */
+        input:focus {
+            outline: none;
+            border-color: transparent;
+        }
+
+        input:focus::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+            border-radius: 50%;
+            background: rgba(142, 68, 173, 0.2);
+            box-shadow: 0 0 10px rgba(142, 68, 173, 1), 0 0 20px rgba(142, 68, 173, 0.7);
+            animation: neonCircle 0.5s ease-in-out infinite;
+        }
+
+        /* Neon circle animation */
+        @keyframes neonCircle {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 5px rgba(142, 68, 173, 1), 0 0 10px rgba(142, 68, 173, 0.7);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 15px rgba(142, 68, 173, 1), 0 0 25px rgba(142, 68, 173, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 5px rgba(142, 68, 173, 1), 0 0 10px rgba(142, 68, 173, 0.7);
+            }
+        }
+
+        /* Button styling */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #8e44ad;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #9b59b6;
+        }
+
+        /* Error message style */
+        .error-message {
+            display: none;
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Show error message when triggered */
+        .error-message.show {
+            display: block;
+        }
+
+        /* Animation for form elements */
+        .login-container {
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+            <div class="error-message" id="error-message">Invalid Username or Password!</div>
+        </form>
+    </div>
+
+    <script>
+        // Get references to the form and input elements
+        const form = document.getElementById('loginForm');
+        const usernameField = document.getElementById('username');
+        const passwordField = document.getElementById('password');
+        const errorMessage = document.getElementById('error-message');
+
+        // Add event listener for form submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();  // Prevent form submission for validation
+
+            const username = usernameField.value;
+            const password = passwordField.value;
+
+            // Simple validation: Check if both fields are filled
+            if (username === '' || password === '') {
+                errorMessage.textContent = 'Please fill out both fields.';
+                errorMessage.classList.add('show');
+                return;
+            }
+
+            // Simulating user data validation
+            if (username === 'admin' && password === 'password123') {
+                errorMessage.classList.remove('show');
+                alert('Login Successful!');
+                // Redirect to another page or do something else here
+            } else {
+                errorMessage.textContent = 'Invalid Username or Password!';
+                errorMessage.classList.add('show');
+            }
+        });
+
+        // Optional: Focus on username field on page load
+        window.onload = () => usernameField.focus();
+    </script>
+
+</body>
+</html>
